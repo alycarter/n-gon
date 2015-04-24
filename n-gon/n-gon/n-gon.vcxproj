@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FB100D3D-9854-4143-98C5-C7859CCD2B0A}</ProjectGuid>
+    <RootNamespace>ngon</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AimingEnemyController.cpp" />
+    <ClCompile Include="BulletController.cpp" />
+    <ClCompile Include="CollisionListener.cpp" />
+    <ClCompile Include="emmet-engine\Component.cpp" />
+    <ClCompile Include="emmet-engine\Controls.cpp" />
+    <ClCompile Include="emmet-engine\Entity.cpp" />
+    <ClCompile Include="emmet-engine\Game.cpp" />
+    <ClCompile Include="emmet-engine\GraphicsCapture.cpp" />
+    <ClCompile Include="emmet-engine\GraphicsManager.cpp" />
+    <ClCompile Include="emmet-engine\GraphicsRenderer.cpp" />
+    <ClCompile Include="emmet-engine\GraphicsResource.cpp" />
+    <ClCompile Include="emmet-engine\InputLayoutReader.cpp" />
+    <ClCompile Include="emmet-engine\InstanceGroup.cpp" />
+    <ClCompile Include="emmet-engine\Mesh.cpp" />
+    <ClCompile Include="emmet-engine\Object.cpp" />
+    <ClCompile Include="emmet-engine\ObjLoader.cpp" />
+    <ClCompile Include="emmet-engine\RenderPass.cpp" />
+    <ClCompile Include="emmet-engine\Shader.cpp" />
+    <ClCompile Include="emmet-engine\State.cpp" />
+    <ClCompile Include="emmet-engine\StateMachine.cpp" />
+    <ClCompile Include="emmet-engine\Texture.cpp" />
+    <ClCompile Include="emmet-engine\Time.cpp" />
+    <ClCompile Include="emmet-engine\Transform.cpp" />
+    <ClCompile Include="emmet-engine\Window.cpp" />
+    <ClCompile Include="LineRenderer.cpp" />
+    <ClCompile Include="ParticleEmmiter.cpp" />
+    <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="ShapeRenderer.cpp" />
+    <ClCompile Include="N-gon.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="SceneCamera.cpp" />
+    <ClCompile Include="ShipController.cpp" />
+    <ClCompile Include="SimpleEnemyController.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AimingEnemyController.h" />
+    <ClInclude Include="BulletController.h" />
+    <ClInclude Include="CollisionListener.h" />
+    <ClInclude Include="emmet-engine\Component.h" />
+    <ClInclude Include="emmet-engine\Controls.h" />
+    <ClInclude Include="emmet-engine\Entity.h" />
+    <ClInclude Include="emmet-engine\Game.h" />
+    <ClInclude Include="emmet-engine\GraphicsCapture.h" />
+    <ClInclude Include="emmet-engine\GraphicsManager.h" />
+    <ClInclude Include="emmet-engine\GraphicsRenderer.h" />
+    <ClInclude Include="emmet-engine\GraphicsResource.h" />
+    <ClInclude Include="emmet-engine\InputLayoutReader.h" />
+    <ClInclude Include="emmet-engine\InstanceGroup.h" />
+    <ClInclude Include="emmet-engine\Mesh.h" />
+    <ClInclude Include="emmet-engine\Object.h" />
+    <ClInclude Include="emmet-engine\ObjLoader.h" />
+    <ClInclude Include="emmet-engine\RenderPass.h" />
+    <ClInclude Include="emmet-engine\Shader.h" />
+    <ClInclude Include="emmet-engine\State.h" />
+    <ClInclude Include="emmet-engine\StateMachine.h" />
+    <ClInclude Include="emmet-engine\Texture.h" />
+    <ClInclude Include="emmet-engine\Time.h" />
+    <ClInclude Include="emmet-engine\Transform.h" />
+    <ClInclude Include="emmet-engine\UpdatePackage.h" />
+    <ClInclude Include="emmet-engine\Window.h" />
+    <ClInclude Include="LineRenderer.h" />
+    <ClInclude Include="ParticleEmmiter.h" />
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="ShapeRenderer.h" />
+    <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="SceneCamera.h" />
+    <ClInclude Include="ShipController.h" />
+    <ClInclude Include="SimpleEnemyController.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Line.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
