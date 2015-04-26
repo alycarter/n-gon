@@ -1,17 +1,11 @@
 #include "Scene.h"
 #include "SceneCamera.h"
-#include "ShapeRenderer.h"
-#include "PlayerController.h"
-#include "Physics.h"
-#include "ShipController.h"
-#include "ParticleEmmiter.h"
-#include "SimpleEnemyController.h"
-#include "AimingEnemyController.h"
 #include "emmet-engine\Transform.h"
 #include "emmet-engine\GraphicsManager.h"
 #include "emmet-engine\RenderPass.h"
 #include "emmet-engine\Entity.h"
-
+#include "ShipFactory.h"
+#include "LevelController.h"
 
 Scene::Scene(GraphicsManager * graphics)
 {
@@ -24,30 +18,16 @@ Scene::Scene(GraphicsManager * graphics)
 	camera->addComponent(new SceneCamera());
 	addEntity(camera);
 
+	ShipFactory factory;
+
 	Entity * player = new Entity();
-	player->addComponent(new Physics());
-	player->addComponent(new ShipController(10, 15, 100, XMConvertToRadians(90), 0.25f, 5));
-	player->addComponent(new ShapeRenderer(graphics));
-	player->addComponent(new ParticleEmmiter(graphics, 100));
-	player->addComponent(new PlayerController());
-	Transform * transform = player->getComponentOfType<Transform>();
-	player->getComponentOfType<Physics>()->addCollisionListener(player->getComponentOfType<ShipController>());
-	transform->setPosition(&XMVectorSet(100, 100, 0, 0));
+	factory.createShip(player, graphics, SHIP_TYPE_PLAYER);
+	player->getComponentOfType<Transform>()->setPosition(&XMVectorSet(1280/2, 720/2, 0, 0));
 	addEntity(player);
 
-	for (unsigned int i = 0; i < 5; i++)
-	{
-		Entity * enemy = new Entity();
-		enemy->addComponent(new Physics());
-		enemy->addComponent(new ShipController(5, 15, 100, XMConvertToRadians(90), 1.5f, 5));
-		enemy->addComponent(new ShapeRenderer(graphics));
-		enemy->addComponent(new ParticleEmmiter(graphics, 100));
-		enemy->addComponent(new AimingEnemyController());
-		enemy->getComponentOfType<Physics>()->addCollisionListener(enemy->getComponentOfType<ShipController>());
-		transform = enemy->getComponentOfType<Transform>();
-		transform->setPosition(&XMVectorSet(200.0f + (rand() % 1000), 200.0f + (rand() % 500), 0, 0));
-		addEntity(enemy);
-	}
+	Entity * level = new Entity();
+	level->addComponent(new LevelController());
+	addEntity(level);
 }
 
 

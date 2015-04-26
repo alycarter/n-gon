@@ -2,6 +2,9 @@
 #include "emmet-engine\Component.h"
 #include "CollisionListener.h"
 
+#include <DirectXMath.h>
+using namespace DirectX;
+
 enum TURN_DIRECTION
 {
 	TURN_CLOCKWISE = -1, TURN_COUNTER_CLOCKWISE = 1, TURN_NONE = 0
@@ -13,7 +16,7 @@ class ShipController :
 	public Component, public CollisionListener
 {
 public:
-	ShipController(unsigned int health, float radius, float speed, float turnSpeed, float fireRate, float projectileRadius);
+	ShipController(unsigned int health, float radius, float speed, float turnSpeed, float fireRate, float projectileRadius, XMFLOAT4 * colorIn);
 	~ShipController();
 	void update(UpdatePackage * package);
 	void thrust();
@@ -21,7 +24,8 @@ public:
 	void fire();
 	void onCollide(Entity * entity);
 private:
-	unsigned int health;
+	void fireBullet(UpdatePackage * package);
+	int health;
 	float radius;
 	float speed;
 	float turnSpeed;
@@ -36,5 +40,6 @@ private:
 	unsigned int mesh;
 	float particleDelay;
 	float damageDelay;
+	XMFLOAT4 color;
 };
 

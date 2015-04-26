@@ -88,6 +88,7 @@
     <ClCompile Include="emmet-engine\Time.cpp" />
     <ClCompile Include="emmet-engine\Transform.cpp" />
     <ClCompile Include="emmet-engine\Window.cpp" />
+    <ClCompile Include="LevelController.cpp" />
     <ClCompile Include="LineRenderer.cpp" />
     <ClCompile Include="ParticleEmmiter.cpp" />
     <ClCompile Include="Physics.cpp" />
@@ -97,6 +98,7 @@
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="SceneCamera.cpp" />
     <ClCompile Include="ShipController.cpp" />
+    <ClCompile Include="ShipFactory.cpp" />
     <ClCompile Include="SimpleEnemyController.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +127,7 @@
     <ClInclude Include="emmet-engine\Transform.h" />
     <ClInclude Include="emmet-engine\UpdatePackage.h" />
     <ClInclude Include="emmet-engine\Window.h" />
+    <ClInclude Include="LevelController.h" />
     <ClInclude Include="LineRenderer.h" />
     <ClInclude Include="ParticleEmmiter.h" />
     <ClInclude Include="Physics.h" />
@@ -133,6 +136,7 @@
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="SceneCamera.h" />
     <ClInclude Include="ShipController.h" />
+    <ClInclude Include="ShipFactory.h" />
     <ClInclude Include="SimpleEnemyController.h" />
   </ItemGroup>
   <ItemGroup>

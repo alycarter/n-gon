@@ -83,8 +83,8 @@ void Physics::update(UpdatePackage * package)
 				notifyCollisionListeners(entity);
 				colliders.at(i)->notifyCollisionListeners(package->entity);
 				XMVECTOR vel = getVelocity() - colliders.at(i)->getVelocity();
-				colliders.at(i)->addVelocity(&(vel / 4.0f));
-				addVelocity(&(-vel*1.25f));
+				colliders.at(i)->addVelocity(&(vel));
+				addVelocity(&(-vel));
 			}
 		}
 	}

@@ -9,7 +9,7 @@
 #include "ParticleEmmiter.h"
 #include "BulletController.h"
 
-ShipController::ShipController(unsigned int healthIn, float radiusIn, float speedIn, float turnSpeedIn, float fireRateIn, float projectileRadiusIn)
+ShipController::ShipController(unsigned int healthIn, float radiusIn, float speedIn, float turnSpeedIn, float fireRateIn, float projectileRadiusIn, XMFLOAT4 * colorIn)
 {
 	health = healthIn;
 	radius = radiusIn;
@@ -24,6 +24,7 @@ ShipController::ShipController(unsigned int healthIn, float radiusIn, float spee
 	reDraw = true;
 	particleDelay = 0;
 	damageDelay = 0;
+	color = *colorIn;
 }
 
 ShipController::~ShipController()
@@ -65,24 +66,7 @@ void ShipController::update(UpdatePackage * package)
 	particleDelay -= package->time->getDeltaTime();
 	if (firing)
 	{
-		Entity * bullet = new Entity();
-		bullet->addComponent(new BulletController());
-		Transform * bulletTran = bullet->getComponentOfType<Transform>();
-		bulletTran->setPosition(&(transform->getPosition() + (transform->getUp() * (5+ radius + projectileRadius))));
-		bulletTran->setRotation(&transform->getRotation());
-		Physics * bulletPhysics = new Physics();
-		bulletPhysics->addVelocity(&physics->getVelocity());
-		bulletPhysics->addVelocity(&(transform->getUp() * 200));
-		physics->addVelocity(&(transform->getUp() * -10));
-		bulletPhysics->setColliderRadius(projectileRadius);
-		bullet->addComponent(bulletPhysics);
-		ShapeRenderer * renderer = new ShapeRenderer(package->graphics);
-		renderer->buildShape(3, projectileRadius, 5, &XMFLOAT4(0.5f, 1.0f, 0.5f, 1.0f));
-		bullet->addComponent(renderer);
-		bulletPhysics->addCollisionListener(bullet->getComponentOfType<BulletController>());
-		package->state->addEntity(bullet);
-		fireDelay = fireRate;
-		firing = false;
+		fireBullet(package);
 	}
 	fireDelay -= package->time->getDeltaTime();
 
@@ -98,9 +82,9 @@ void ShipController::update(UpdatePackage * package)
 		ShapeRenderer * renderer = package->entity->getComponentOfType<ShapeRenderer>();
 		if (renderer != NULL)
 		{
-			renderer->buildShape(health + 2, radius, 5, &XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f));
+			renderer->buildShape(health + 2, radius, 5, &color);
 			LineInstance line;
-			line.color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+			line.color = color;
 			line.p1 = XMFLOAT3(0, 0, 0);
 			line.p2 = XMFLOAT3(0, radius, 0);
 			line.n1 = XMFLOAT3(-2.5f, 0, 0);
@@ -142,4 +126,28 @@ void ShipController::fire()
 		firing = true;
 		fireDelay = fireRate;
 	}
+}
+
+void ShipController::fireBullet(UpdatePackage * package)
+{
+	Physics * physics = package->entity->getComponentOfType<Physics>();
+	Transform * transform = package->entity->getComponentOfType<Transform>();
+	Entity * bullet = new Entity();
+	bullet->addComponent(new BulletController());
+	Transform * bulletTran = bullet->getComponentOfType<Transform>();
+	bulletTran->setPosition(&(transform->getPosition() + (transform->getUp() * (5 + radius + projectileRadius))));
+	bulletTran->setRotation(&transform->getRotation());
+	Physics * bulletPhysics = new Physics();
+	bulletPhysics->addVelocity(&physics->getVelocity());
+	bulletPhysics->addVelocity(&(transform->getUp() * 200));
+	physics->addVelocity(&(transform->getUp() * -10));
+	bulletPhysics->setColliderRadius(projectileRadius);
+	bullet->addComponent(bulletPhysics);
+	ShapeRenderer * renderer = new ShapeRenderer(package->graphics);
+	renderer->buildShape(3, projectileRadius, 5, &color);
+	bullet->addComponent(renderer);
+	bulletPhysics->addCollisionListener(bullet->getComponentOfType<BulletController>());
+	package->state->addEntity(bullet);
+	fireDelay = fireRate;
+	firing = false;
 }
