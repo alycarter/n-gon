@@ -23,8 +23,10 @@ public:
 	void turn(TURN_DIRECTION turn);
 	void fire();
 	void onCollide(Entity * entity);
+	XMFLOAT4 * getColor();
 private:
 	void fireBullet(UpdatePackage * package);
+	void kill(UpdatePackage * package);
 	int health;
 	float radius;
 	float speed;

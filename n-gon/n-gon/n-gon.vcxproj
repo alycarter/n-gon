@@ -88,6 +88,7 @@
     <ClCompile Include="emmet-engine\Time.cpp" />
     <ClCompile Include="emmet-engine\Transform.cpp" />
     <ClCompile Include="emmet-engine\Window.cpp" />
+    <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="LevelController.cpp" />
     <ClCompile Include="LineRenderer.cpp" />
     <ClCompile Include="ParticleEmmiter.cpp" />
@@ -127,6 +128,7 @@
     <ClInclude Include="emmet-engine\Transform.h" />
     <ClInclude Include="emmet-engine\UpdatePackage.h" />
     <ClInclude Include="emmet-engine\Window.h" />
+    <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="LevelController.h" />
     <ClInclude Include="LineRenderer.h" />
     <ClInclude Include="ParticleEmmiter.h" />

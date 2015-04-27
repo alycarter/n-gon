@@ -72,8 +72,7 @@ void ShipController::update(UpdatePackage * package)
 
 	if (health <= 0)
 	{
-		package->entity->requestDelete();
-		package->entity->getComponentOfType<Physics>()->removeCollisionListener(this);
+		kill(package);
 	}
 	damageDelay -= package->time->getDeltaTime();
 
@@ -150,4 +149,27 @@ void ShipController::fireBullet(UpdatePackage * package)
 	package->state->addEntity(bullet);
 	fireDelay = fireRate;
 	firing = false;
+}
+
+XMFLOAT4 * ShipController::getColor()
+{
+	return &color;
+}
+
+void ShipController::kill(UpdatePackage * package)
+{
+	package->entity->requestDelete();
+	package->entity->getComponentOfType<Physics>()->removeCollisionListener(this);
+	Entity * explosion = new Entity();
+	ParticleEmmiter * emmiter;
+	explosion->addComponent(new ParticleEmmiter(package->graphics, 100));
+	emmiter = explosion->getComponentOfType<ParticleEmmiter>();
+	XMVECTOR pos = package->entity->getComponentOfType<Transform>()->getPosition();
+	for (int i = 0; i < 100; i++)
+	{
+		XMVECTOR direction = XMVector3Rotate( XMVectorSet(1, 0, 0, 0), XMQuaternionRotationRollPitchYaw(0,0,XMConvertToRadians((float)(rand() % 360))));
+		emmiter->emmitParticle(&(direction + pos),&(direction * 200.0f));
+	}
+	package->state->addEntity(explosion);
+
 }

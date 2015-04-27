@@ -5,6 +5,9 @@
 #include "emmet-engine\State.h"
 #include "emmet-engine\Transform.h"
 #include "ShipFactory.h"
+#include "EnemySpawner.h"
+#include "ShapeRenderer.h"
+#include "ShipController.h"
 
 
 LevelController::LevelController()
@@ -33,7 +36,11 @@ void LevelController::update(UpdatePackage * package)
 		{
 			factory.createShip(entity, package->graphics, SHIP_TYPE_SPIN_ENEMY);
 		}
-		entity->getComponentOfType<Transform>()->setPosition(&XMVectorSet((float)(rand() % 1280), (float)(rand() % 720), 0, 0));
-		package->state->addEntity(entity);
+		Entity * spawner = new Entity();
+		spawner->getComponentOfType<Transform>()->setPosition(&XMVectorSet((float)(rand() % 1280), (float)(rand() % 720), 0, 0));
+		spawner->addComponent(new EnemySpawner(entity, 3));
+		spawner->addComponent(new ShapeRenderer(package->graphics));
+		spawner->getComponentOfType<ShapeRenderer>()->buildShape(10, 1, 0.1f, entity->getComponentOfType<ShipController>()->getColor());
+		package->state->addEntity(spawner);
 	}
 }

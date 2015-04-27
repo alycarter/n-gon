@@ -28,7 +28,7 @@ void ShipFactory::createShip(Entity * ship, GraphicsManager * graphics, SHIP_TYP
 		ship->addComponent(new PlayerController());
 		break;
 	case SHIP_TYPE_SPIN_ENEMY:
-		createBaseShip(ship, 3, 15, 100, XMConvertToRadians(90), 1.0f, 5, &XMFLOAT4(1, 0, 1, 1), graphics);
+		createBaseShip(ship, 3, 15, 100, XMConvertToRadians(180), 1.0f, 5, &XMFLOAT4(1, 0, 1, 1), graphics);
 		ship->addComponent(new SimpleEnemyController());
 		break;
 	case SHIP_TYPE_CHASE_ENEMY:
