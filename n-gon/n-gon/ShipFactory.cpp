@@ -21,6 +21,7 @@ ShipFactory::~ShipFactory()
 
 void ShipFactory::createShip(Entity * ship, GraphicsManager * graphics, SHIP_TYPE type)
 {
+	//make a different ship depending on the given ship type
 	switch (type)
 	{
 	case SHIP_TYPE_PLAYER:
@@ -43,6 +44,7 @@ void ShipFactory::createShip(Entity * ship, GraphicsManager * graphics, SHIP_TYP
 
 void ShipFactory::createBaseShip(Entity * ship, unsigned int health, float radius, float speed, float turnSpeed, float fireRate, float projectileRadius, XMFLOAT4 * color, GraphicsManager * graphics)
 {
+	//add the parts needed for a ship and connect the collision listener
 	ship->addComponent(new Physics());
 	ship->addComponent(new ShipController(health, radius, speed, turnSpeed, fireRate, projectileRadius, color));
 	ship->addComponent(new ShapeRenderer(graphics));
