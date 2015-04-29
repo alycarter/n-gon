@@ -16,7 +16,9 @@ BulletController::~BulletController()
 
 void BulletController::update(UpdatePackage * package)
 {
+	//lower the life count
 	life -= package->time->getDeltaTime();
+	//if the bullet has collided or ran out of life then delete it
 	if (remove || life < 0)
 	{
 		package->entity->requestDelete();

@@ -4,8 +4,13 @@ class SceneCamera :
 	public Component
 {
 public:
-	SceneCamera();
+	SceneCamera(float viewWidthIn, float viewHeightIn);
 	~SceneCamera();
 	void update(UpdatePackage * package);
+	float getViewWidth();
+	float getViewHeight();
+private:
+	float viewWidth;
+	float viewHeight;
 };
 

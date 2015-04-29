@@ -20,8 +20,8 @@ ShipController::ShipController(unsigned int healthIn, float radiusIn, float spee
 	//is ready to fire straight away
 	fireDelay = 0;
 	projectileRadius = projectileRadiusIn;
-	//start by turning clockwise (change this to analogue input rather than digital)
-	turnDirection = TURN_CLOCKWISE;
+	//start by not turning
+	turnDirection = 0;
 	//the ship is not thrusting
 	thrusting = false;
 	//the ship is not firing
@@ -49,17 +49,8 @@ void ShipController::update(UpdatePackage * package)
 	float change = package->time->getDeltaTime() * turnSpeed * (float)turnDirection;
 	//turn the ship
 	physics->addTorque(change * XMConvertToRadians(360.0f));
-	//try to stabalize the ships tourque
-	if (physics->getTorque() < 0)
-	{
-		turnDirection = TURN_COUNTER_CLOCKWISE;
-	}
-	else
-	{
-		turnDirection = TURN_CLOCKWISE;
-	}
 	//add drag to the torque
-	physics->addTorque(physics->getTorque() * - package->time->getDeltaTime());
+	physics->addTorque(physics->getTorque() * - package->time->getDeltaTime() * 3.0f);
 
 	//if the ship should thrust
 	if (thrusting)
@@ -80,26 +71,20 @@ void ShipController::update(UpdatePackage * package)
 	}
 	//apply drag to the velocity
 	physics->addVelocity(&(physics->getVelocity() * -package->time->getDeltaTime()/4.0f));
-	//lower the particle delay
-	particleDelay -= package->time->getDeltaTime();
 	
 	//if the ship should fire then fire
 	if (firing)
 	{
 		fireBullet(package);
 	}
-	//lower the bullet fire delay
-	fireDelay -= package->time->getDeltaTime();
-
+	
 	//if the ship has no health
 	if (health <= 0)
 	{
 		//kill the ship
 		kill(package);
 	}
-	//lower the damage delay
-	damageDelay -= package->time->getDeltaTime();
-
+	
 	//if the ship needs to redraw
 	if (reDraw)
 	{
@@ -123,6 +108,7 @@ void ShipController::update(UpdatePackage * package)
 		//the ship soesnt need to be redrawn any more
 		reDraw = false;
 	}
+	updateDelayTimers(package->time->getDeltaTime());
 }
 
 void ShipController::onCollide(Entity * entity)
@@ -148,40 +134,64 @@ void ShipController::thrust()
 	thrusting = true;
 }
 
-void ShipController::turn(TURN_DIRECTION turn)
+void ShipController::turn(float direction)
 {
-	turnDirection = turn;
+	if (direction > 1)
+	{
+		direction = 1;
+	}
+	if (direction < -1)
+	{
+		direction = -1;
+	}
+	turnDirection = direction;
 }
 
 void ShipController::fire()
 {
+	//if we can fire
 	if (fireDelay < 0)
 	{
+		//set the fire flag to true
 		firing = true;
-		fireDelay = fireRate;
 	}
 }
 
 void ShipController::fireBullet(UpdatePackage * package)
 {
+	//get the ships transform and physics
 	Physics * physics = package->entity->getComponentOfType<Physics>();
 	Transform * transform = package->entity->getComponentOfType<Transform>();
+	//create a bullet entity
 	Entity * bullet = new Entity();
+	//attach a bullet controller
 	bullet->addComponent(new BulletController());
+	//get the bullets transform
 	Transform * bulletTran = bullet->getComponentOfType<Transform>();
+	//more the bullet to infront of the ship
 	bulletTran->setPosition(&(transform->getPosition() + (transform->getUp() * (5 + radius + projectileRadius))));
+	//set the rotatino to the players ship
 	bulletTran->setRotation(&transform->getRotation());
+	//make the bullets physics
 	Physics * bulletPhysics = new Physics();
+	//add the ships velocity to the bullet
 	bulletPhysics->addVelocity(&physics->getVelocity());
+	//make the bullet travel forwaard
 	bulletPhysics->addVelocity(&(transform->getUp() * 200));
+	//push the ship back slightly
 	physics->addVelocity(&(transform->getUp() * -10));
+	//set the bullet collider
 	bulletPhysics->setColliderRadius(projectileRadius);
+	//add the physics to the bullet
 	bullet->addComponent(bulletPhysics);
+	//set the shape renderer for the bullet
 	ShapeRenderer * renderer = new ShapeRenderer(package->graphics);
 	renderer->buildShape(3, projectileRadius, 5, &color);
 	bullet->addComponent(renderer);
 	bulletPhysics->addCollisionListener(bullet->getComponentOfType<BulletController>());
+	//add the bullet
 	package->state->addEntity(bullet);
+	//reset the fire information
 	fireDelay = fireRate;
 	firing = false;
 }
@@ -193,18 +203,34 @@ XMFLOAT4 * ShipController::getColor()
 
 void ShipController::kill(UpdatePackage * package)
 {
+	//request the entities deletion
 	package->entity->requestDelete();
+	//remove the collision listener from the physiscs
 	package->entity->getComponentOfType<Physics>()->removeCollisionListener(this);
+	//make an explosion 
 	Entity * explosion = new Entity();
 	ParticleEmmiter * emmiter;
 	explosion->addComponent(new ParticleEmmiter(package->graphics, 100));
 	emmiter = explosion->getComponentOfType<ParticleEmmiter>();
 	XMVECTOR pos = package->entity->getComponentOfType<Transform>()->getPosition();
+	//spawn the explosion particles
 	for (int i = 0; i < 100; i++)
 	{
 		XMVECTOR direction = XMVector3Rotate( XMVectorSet(1, 0, 0, 0), XMQuaternionRotationRollPitchYaw(0,0,XMConvertToRadians((float)(rand() % 360))));
 		emmiter->emmitParticle(&(direction + pos),&(direction * 200.0f));
 	}
+	//add the explosion
 	package->state->addEntity(explosion);
+
+}
+
+void ShipController::updateDelayTimers(float change)
+{
+	//lower the particle delay
+	particleDelay -= change;
+	//lower the bullet fire delay
+	fireDelay -= change;
+	//lower the damage delay
+	damageDelay -= change;
 
 }

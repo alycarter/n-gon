@@ -9,6 +9,7 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	FILE * stream;
+	//if in debug mode then create a console
 	if (DEBUG)
 	{
 		AllocConsole();
@@ -18,9 +19,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//create a game
 	Game game;
 	//play the game withe the window size and name info
-	game.initialize(hInstance, L"N-GON", 1280, 720);
+	game.initialize(hInstance, L"N-GON", 1920, 1080);
+	//create the base state
 	Scene * scene = new Scene(game.getGraphics());
+	//play the game with the scene state
 	game.play(scene);
+	//if in debug close the console
 	if (DEBUG)
 	{
 		fclose(stream);

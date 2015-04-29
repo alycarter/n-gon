@@ -15,7 +15,6 @@
 
 PlayerController::PlayerController()
 {
-	fireDelay = 0;
 }
 
 
@@ -25,12 +24,15 @@ PlayerController::~PlayerController()
 
 void PlayerController::update(UpdatePackage * package)
 {
+	//get the ship controller
 	ShipController * controller = package->entity->getComponentOfType<ShipController>();
+	//if w is pressed then thrust
 	if (package->controls->isKeyPressed('W'))
 	{
 		controller->thrust();
 	}
-	int direction = 0;
+	//get the direction the player wants to turn
+	float direction = 0;
 	if (package->controls->isKeyPressed('A'))
 	{
 		direction--;
@@ -39,20 +41,11 @@ void PlayerController::update(UpdatePackage * package)
 	{
 		direction++;
 	}
-	if (direction == 1)
-	{
-		controller->turn(TURN_COUNTER_CLOCKWISE);
-	}
-	if (direction == -1)
-	{
-		controller->turn(TURN_CLOCKWISE);
-	}
+	//turn the ship
+	controller->turn(direction);
+	//if space is pressed then shoot
 	if (package->controls->isKeyPressed(VK_SPACE))
 	{
 		controller->fire();
-	}
-	if (package->controls->isKeyReleased(VK_ESCAPE))
-	{
-		package->stateMachine->requestPop();
 	}
 }

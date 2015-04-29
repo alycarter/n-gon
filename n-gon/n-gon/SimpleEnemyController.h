@@ -9,9 +9,5 @@ public:
 	SimpleEnemyController();
 	~SimpleEnemyController();
 	void update(UpdatePackage * package);
-private:
-	float swapDelay;
-	float swapTime;
-	TURN_DIRECTION direction;
 };
 

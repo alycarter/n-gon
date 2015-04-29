@@ -5,12 +5,6 @@
 
 SimpleEnemyController::SimpleEnemyController()
 {
-	//time between rotation swaps
-	swapTime = 2.0f;
-	//time until next rotation swap
-	swapDelay = swapTime / 2.0f;
-	//starting rotation
-	direction = TURN_CLOCKWISE;
 }
 
 
@@ -24,24 +18,7 @@ void SimpleEnemyController::update(UpdatePackage * package)
 	//get the ships controller
 	ShipController * ship = package->entity->getComponentOfType<ShipController>();
 	//turn the ship
-	ship->turn(direction);
+	ship->turn(cos(package->time->getRunTime()));
 	//fire if possible
 	ship->fire();
-	//lower the time until the next swap
-	swapDelay -= package->time->getDeltaTime();
-	//if we need to swap
-	if (swapDelay < 0)
-	{
-		//reset the swap timer
-		swapDelay = swapTime;
-		//flip the direction we're turning
-		if (direction == TURN_CLOCKWISE)
-		{
-			direction = TURN_COUNTER_CLOCKWISE;
-		}
-		else
-		{
-			direction = TURN_CLOCKWISE;
-		}
-	}
 }
