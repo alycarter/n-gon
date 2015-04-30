@@ -42,16 +42,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-#visual studio file
+/n-gon/n-gon/Debug/*
+/n-gon/Debug/*
 
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-build/
-bld/
-[Bb]in/
-[Oo]bj/
