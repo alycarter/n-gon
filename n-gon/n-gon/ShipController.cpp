@@ -136,6 +136,7 @@ void ShipController::thrust()
 
 void ShipController::turn(float direction)
 {
+	//clamp direction to -1 and 1
 	if (direction > 1)
 	{
 		direction = 1;
@@ -210,11 +211,11 @@ void ShipController::kill(UpdatePackage * package)
 	//make an explosion 
 	Entity * explosion = new Entity();
 	ParticleEmmiter * emmiter;
-	explosion->addComponent(new ParticleEmmiter(package->graphics, 100));
+	explosion->addComponent(new ParticleEmmiter(package->graphics, 25));
 	emmiter = explosion->getComponentOfType<ParticleEmmiter>();
 	XMVECTOR pos = package->entity->getComponentOfType<Transform>()->getPosition();
 	//spawn the explosion particles
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 25; i++)
 	{
 		XMVECTOR direction = XMVector3Rotate( XMVectorSet(1, 0, 0, 0), XMQuaternionRotationRollPitchYaw(0,0,XMConvertToRadians((float)(rand() % 360))));
 		emmiter->emmitParticle(&(direction + pos),&(direction * 200.0f));

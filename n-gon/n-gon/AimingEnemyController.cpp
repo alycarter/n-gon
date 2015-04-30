@@ -5,6 +5,7 @@
 #include "emmet-engine\UpdatePackage.h"
 #include "emmet-engine\Entity.h"
 #include "Physics.h"
+#include "PlayerController.h"
 
 AimingEnemyController::AimingEnemyController()
 {
@@ -36,14 +37,14 @@ void AimingEnemyController::update(UpdatePackage * package)
 		difference = XMVector3Normalize(difference);
 		XMVECTOR cross = XMVector3Cross(transform->getUp(), difference);
 		// turn the ship based on the z component of the cross product
-		ship->turn(-XMVectorGetZ(cross));
+		ship->turn(-XMVectorGetZ(cross) * 2);
 		//if the vectors are moslty aligned then fire
 		if (abs(XMVectorGetZ(cross)) < 0.1f)
 		{
 			ship->fire();
 		}
 		//if the ship is mostly facing the player and is too far away then thrust
-		if (distance > 200 && abs(abs(XMVectorGetZ(cross)) < 0.5f))
+		if (distance > 300 && abs(abs(XMVectorGetZ(cross)) < 0.5f))
 		{
 			ship->thrust();
 		}

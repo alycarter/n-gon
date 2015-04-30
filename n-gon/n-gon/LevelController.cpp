@@ -35,11 +35,17 @@ void LevelController::update(UpdatePackage * package)
 		ShipFactory factory;
 		Entity * entity = new Entity();
 		//pick a ship to spawn
-		if (rand() % 2 == 0)
+		int shipType = rand() % 3;
+		//spawn the ship
+		if (shipType == 0)
 		{
 			factory.createShip(entity, package->graphics, SHIP_TYPE_CHASE_ENEMY);
 		}
-		else
+		if (shipType == 1)
+		{
+			factory.createShip(entity, package->graphics, SHIP_TYPE_AIMING_ENEMY);
+		}
+		if (shipType == 2)
 		{
 			factory.createShip(entity, package->graphics, SHIP_TYPE_SPIN_ENEMY);
 		}

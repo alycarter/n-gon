@@ -7,6 +7,7 @@
 #include "PlayerController.h"
 #include "SimpleEnemyController.h"
 #include "AimingEnemyController.h"
+#include "ChaseEnemyController.h"
 
 ShipFactory::ShipFactory()
 {
@@ -33,6 +34,10 @@ void ShipFactory::createShip(Entity * ship, GraphicsManager * graphics, SHIP_TYP
 		ship->addComponent(new SimpleEnemyController());
 		break;
 	case SHIP_TYPE_CHASE_ENEMY:
+		createBaseShip(ship, 3, 15, 100, XMConvertToRadians(90), 1.0f, 5, &XMFLOAT4(1, 1, 0, 1), graphics);
+		ship->addComponent(new ChaseEnemyController());
+		break;
+	case SHIP_TYPE_AIMING_ENEMY:
 		createBaseShip(ship, 3, 15, 100, XMConvertToRadians(90), 1.0f, 5, &XMFLOAT4(1, 0, 0, 1), graphics);
 		ship->addComponent(new AimingEnemyController());
 		break;
