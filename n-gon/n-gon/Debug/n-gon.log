@@ -1,48 +1,8 @@
-﻿Build started 30/04/2015 01:19:49.
-     1>Project "C:\Users\Alex\Documents\n-gon\n-gon\n-gon\n-gon.vcxproj" on node 2 (Rebuild target(s)).
+﻿Build started 30/04/2015 01:23:47.
+     1>Project "C:\Users\Alex\Documents\n-gon\n-gon\n-gon\n-gon.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt AimingEnemyController.cpp BulletController.cpp ChaseEnemyController.cpp CollisionListener.cpp "emmet-engine\Component.cpp" "emmet-engine\Controls.cpp" "emmet-engine\Entity.cpp" "emmet-engine\Game.cpp" "emmet-engine\GraphicsCapture.cpp" "emmet-engine\GraphicsManager.cpp" "emmet-engine\GraphicsRenderer.cpp" "emmet-engine\GraphicsResource.cpp" "emmet-engine\InputLayoutReader.cpp" "emmet-engine\InstanceGroup.cpp" "emmet-engine\Mesh.cpp" "emmet-engine\Object.cpp" "emmet-engine\ObjLoader.cpp" "emmet-engine\RenderPass.cpp" "emmet-engine\Shader.cpp" "emmet-engine\State.cpp" "emmet-engine\StateMachine.cpp" "emmet-engine\Texture.cpp" "emmet-engine\Time.cpp" "emmet-engine\Transform.cpp" "emmet-engine\Window.cpp" EnemySpawner.cpp LevelController.cpp LineRenderer.cpp ParticleEmmiter.cpp Physics.cpp Scene.cpp ShapeRenderer.cpp "N-gon.cpp" PlayerController.cpp SceneCamera.cpp ShipController.cpp ShipFactory.cpp SimpleEnemyController.cpp
-         SimpleEnemyController.cpp
-         ShipFactory.cpp
-         ShipController.cpp
-         SceneCamera.cpp
-         PlayerController.cpp
-         N-gon.cpp
-         ShapeRenderer.cpp
-         Scene.cpp
-         Physics.cpp
-         ParticleEmmiter.cpp
-         LineRenderer.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt LevelController.cpp
          LevelController.cpp
-         EnemySpawner.cpp
-         Window.cpp
-         Transform.cpp
-         Time.cpp
-         Texture.cpp
-         StateMachine.cpp
-         State.cpp
-         Shader.cpp
-         Generating Code...
-         Compiling...
-         RenderPass.cpp
-         ObjLoader.cpp
-         Object.cpp
-         Mesh.cpp
-         InstanceGroup.cpp
-         InputLayoutReader.cpp
-         GraphicsResource.cpp
-         GraphicsRenderer.cpp
-         GraphicsManager.cpp
-         GraphicsCapture.cpp
-         Game.cpp
-         Entity.cpp
-         Controls.cpp
-         Component.cpp
-         CollisionListener.cpp
-         ChaseEnemyController.cpp
-         BulletController.cpp
-         AimingEnemyController.cpp
-         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Alex\Documents\n-gon\n-gon\Debug\n-gon.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Alex\Documents\n-gon\n-gon\Debug\n-gon.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Alex\Documents\n-gon\n-gon\Debug\n-gon.lib" /MACHINE:X86 Debug\AimingEnemyController.obj
          Debug\BulletController.obj
@@ -83,8 +43,8 @@
          Debug\ShipFactory.obj
          Debug\SimpleEnemyController.obj
          n-gon.vcxproj -> C:\Users\Alex\Documents\n-gon\n-gon\Debug\n-gon.exe
-     1>Done Building Project "C:\Users\Alex\Documents\n-gon\n-gon\n-gon\n-gon.vcxproj" (Rebuild target(s)).
+     1>Done Building Project "C:\Users\Alex\Documents\n-gon\n-gon\n-gon\n-gon.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:23.18
+Time Elapsed 00:00:01.55
