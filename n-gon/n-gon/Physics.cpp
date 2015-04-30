@@ -76,7 +76,8 @@ void Physics::update(UpdatePackage * package)
 	//set the new position
 	transform->setPosition(&pos);
 	//rotate the object
-	transform->setRotation(&XMQuaternionMultiply(transform->getRotation(), XMQuaternionRotationAxis(XMVectorSet(0,0,1,0), torque * package->time->getDeltaTime())));
+	float deltaTorque = torque * package->time->getDeltaTime();
+	transform->setRotation(&XMQuaternionMultiply(transform->getRotation(), XMQuaternionRotationRollPitchYaw(0, 0, deltaTorque)));
 	//get a list of other physics objects in the scene
 	vector<Physics *> colliders;
 	package->state->getComponentsOfType<Physics>(&colliders);

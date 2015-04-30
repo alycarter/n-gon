@@ -29,7 +29,7 @@ void ChaseEnemyController::update(UpdatePackage * package)
 		Transform * transform = package->entity->getComponentOfType<Transform>();
 		Physics * physics = package->entity->getComponentOfType<Physics>();
 		Transform * playerTransform = player->getComponentOfType<Transform>();
-		//find the vector between them
+		//find the vector between the ship and player
 		XMVECTOR difference = transform->getPosition() - playerTransform->getPosition();
 		//get the length of the distance
 		float distance = XMVectorGetX(XMVector3Length(difference));
